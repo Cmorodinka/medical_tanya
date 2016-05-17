@@ -1,0 +1,17 @@
+<div id="account-nav">
+			<div class="cap">
+				<%= @company.employer.email %>
+			</div>
+			<div class="boxed-nav">
+				<ul>
+					<li>
+						<%= link_to "Профиль компании", edit_admin_companies_profile_path(@company) %>
+					</li>
+					<span class="line-bottom"></span>
+					<li>
+						<%= link_to "Вакансии компании", :controller => :profile, :action => :vacancies, :id => @company %>
+					</li>
+				</ul>
+			</div>
+</div>
+<div class="clear"></div>

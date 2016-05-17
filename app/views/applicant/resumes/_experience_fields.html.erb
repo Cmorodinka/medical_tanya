@@ -1,0 +1,38 @@
+<div class='item'>
+	<%= f.label :company, "Компания"%>
+	<div class='field'>
+	  	<%= f.text_field :company, :value => f.object.company, :class=>"recent_company validate", :default_value => "Компания" %>
+	</div>
+	<!--<a href="#" style="margin: 0 0 0 10px;">Скрыть</a>-->
+</div>	
+<div class='item'>
+	<%= f.label :position, "Занимаемая должность"%>
+	<div class='field'>	  
+		<%= f.text_field :position, :value => f.object.position, :class=>"recent_position validate big ", :default_value => "Какую должность Вы занимали" %>
+	</div>
+</div>
+<div class='item'>  
+    <%= f.label :achievements, "Обязанности, достижения"%>
+	<div class='field'>
+		<%= f.text_area :achievements, :class => "achievements validate", :default_value => "Чем занимались и чего достигли за это время", :class => 'wysihtml5' %>
+	</div>
+</div>	
+<div class='item'>
+     <%= f.label "Период работы", :class => "period_of_work" %>
+	 <div class='field'>
+	 	<div class="experience-date date-from">
+			<%= f.select(:month_from, month_helper, {:include_blank => "Месяц" }, {:class => "month_from styled"}) %> <%= f.select(:year_from, year_list_helper, {:include_blank => "Год"}, {:class => "year_from year styled"}) %>
+		</div>
+		<div class="experience-date date-till">
+			<%= f.select(:month_till, month_helper, {:include_blank => "Месяц" }, {:class => "month_till styled"}) %> <%= f.select(:year_till, year_list_helper, {:include_blank => "Год"}, {:class => "year_till year styled"}) %>
+		</div>
+	 	<span class="span_current_workplace">
+			<%= f.check_box(:current_workplace, {:class => "current_workplace"}, "true", "false")%>
+			<%= f.label :current_workplace, "Сейчас работаю здесь"%>
+		</span>
+	 </div>	
+</div>
+
+<%= f.hidden_field :_destroy %><%= f.link_to_remove "Удалить место работы", :class => "red-link remove-link-experience" %>
+<div class="clearfix"></div>
+

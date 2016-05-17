@@ -1,0 +1,23 @@
+<h1>Карта сайта</h1>
+<ul>
+	<% @a.each do |a| %>
+		<% if a.is_a?(City) %>
+			<li>
+				<%= link_to "Работа #{a.singular('где')}", city_vacancy_path( translit_helper(a.name) ), title: "Медицинские вакансии, работа в #{a.singular('где')}." %>
+			</li>
+		<% elsif a.is_a?(Scope) %>
+			<li>
+				<%= link_to "Работа #{a.singular('где')}", { :controller => :search, :action => :scope, city: nil, scope: translit_helper(a.title) }, title: "Медицинские вакансии в #{a.plural('П')}" %>
+			</li>
+		<% elsif a.is_a?(Category) %>
+			<li>
+				<%= link_to "Работа #{a.singular("Т")}", { :controller => :search, :action => :category, city: nil, scope: translit_helper(a.scope.title), category: translit_helper(a.name) }, title: "Медицинские вакансии #{a.singular("Т")} #{a.scope.plural('В')}" %>
+			</li>
+		<% end %>
+
+	<% end %>
+</ul>
+
+<div class="link-more"><b><%= paginate @a %></div>
+
+

@@ -1,0 +1,130 @@
+<script>
+      //FIXME: убрать скрипт из файла
+      //Если кнопки нет, скрипт удаляет разделитель между кнопкой
+      // "Откликнуться на вакансию" и Контактная информация вакансии
+      $(document).ready(function(){
+            var button = $("#button-bottom").index();
+            if (button == "-1") {
+                  $("tr:last-child th.line-bottom").remove();
+                  $(".paper").css("margin-bottom", "15px"); 
+            }
+      });
+</script>
+
+<%= render "layouts/breadcrumbs" %>
+
+<div class="clear"></div>
+
+<div id="frame">
+      <div class="cap">
+            <% if current_user %>
+                  <% if @vacancy.applicants.where(:id => current_user.id).empty? %>
+                        <h1 id="about"><%= "#{@vacancy.name} (опыт работы #{@vacancy.experiences}, " %><span style="white-space: nowrap;"><%= salary_searh_helper(@vacancy) %></span></h1>
+                  <% else %>
+                        <h1 id="about">Вы откликнулись на эту вакансию,<%= link_to "Избранные вакансии", applicant_my_vacancies_index_url %></h1>
+                  <% end %>
+            <% else %>
+                  <h1 id="about"><%= "#{@vacancy.name} (опыт работы #{@vacancy.experiences}, " %><span style="white-space: nowrap;"><%= salary_searh_helper(@vacancy) %></span></h1>
+            <% end %>
+      </div>
+
+      <div class="boxed">
+            <% if flash[:notice] %>
+                  <br>
+                  <div class="alert alert-block alert-success">
+                        <p id="notice" ><%= flash[:notice] %></p>
+                  </div>
+            <% end %>
+
+      	<table cellpadding="0" cellspacing="0" class="photo-name-employer">
+      		<tr>
+      			<td class="logo-profile"><%= image_tag @vacancy.company.logo.url(:small), :class => "photo-employer" %></td>
+      			<td><h2>&#171;<%= link_to @vacancy.company.name, :controller => "search", :action => "company", :id => @vacancy.company.to_param %>&#187;</h2></td>
+      		</tr>
+      	</table>
+          <table class="paper company" border="0" cellpadding="10">
+                              <tr>
+                              	<td>Должность</td>
+      	                        <td><%= @vacancy.name %></td>
+                              </tr>
+                              <tr>
+                                    <td>Категория</td>
+                                    <td><%= link_to @vacancy.category.name, {:controller => :search, :action => :category, :city => nil, :scope => Russian.translit(@vacancy.category.scope.title).parameterize, :category => Russian.translit(@vacancy.category.name).parameterize} %></td>
+                              </tr>
+						<tr>
+							<td>Зарплата</td>
+							<td><%= salary_helper(@vacancy) %></td>
+						</tr>
+                              <tr>
+                              	<td>Регион</td>
+                              	<td><%= link_to @vacancy.city, city_vacancy_path( translit_helper(@vacancy.city) ) %></td>
+                              </tr>
+                              <tr>
+                              	<td>Опыт работы</td>
+                              	<td><%= @vacancy.experiences %></td>
+                              </tr>
+                              <tr>
+                              	<td>График работы</td>
+                              	<td><%= @vacancy.timetable %></td>
+                              </tr>
+                              <tr>
+                              	<td>Описание вакансии</td>
+                              	<td><%= raw @vacancy.description %></td>
+                              </tr>
+                              <tr>
+                              	<th colspan="2" class="line-bottom"></th>
+                              </tr>
+                              <tr>
+                                    <% if userIsCustomer! %>
+                                    	<td>Контактная информация</td>
+                                    	<td> <% @vacancy.company.company_contacts.each do |contact| %>
+                                    			<div><%= "#{contact.name}: #{contact.phone}" %></v>
+                                    		 <% end %>
+                                    	</td>
+                                          <tr>
+                                                <td></td>
+                                                <td style="height: 40px;"><%= @vacancy.company.employer.email %>
+
+                                          </tr>
+                                    <% elsif current_user && current_user.applicant? && current_user.resume == nil %>
+                                          <td colspan="2" class="message_for_unregistered_user">Чтобы увидеть контакты работодателя <%= link_to "создайте резюме", new_applicant_resume_path %>.</td>
+                                    <% elsif current_user && current_user.employer? && current_user.company == nil %>
+                                          <td colspan="2" class="message_for_unregistered_user">Чтобы увидеть контакты работодателя <%= link_to "создайте профиль компании", new_employer_profile_company_path %>.</td>
+                                    <% else %>
+                                          <td colspan="2" class="message_for_unregistered_user">Чтобы увидеть контакты работодателя <%= link_to "Войдите", login_url %> или <%= link_to "Зарегистрируйтесь", signup_url %>.</td>
+                                    <% end %>
+                              </tr>
+                              <tr>
+                                    <th colspan="2" class="line-bottom"></th>
+                              </tr>
+      				</table>    
+                              <% if current_user && applicant! %>
+                                    <% if @vacancy.applicants.where(:id => current_user.id).empty? %>
+                                    <div id="button-bottom">
+                                          <%= link_to "Откликнуться на вакансию", applicant_resumes_add_vacancy_responded_path(:vacancy_id => @vacancy.id, :vacancy_name => @vacancy.name), :class => "input-sub btn btn-warning", :id => "btn-yellow-for-link" %>
+                                          <div class="clear"></div>
+                                    </div>
+                                    <% end %>
+                              <% end %>
+      </div> <!-- #boxed -->
+</div> <!-- #frame -->
+<div id="account-contacts">
+      <div class="cap">
+            <p>Ваш менеджер</p>
+      </div>
+      <div class="boxed-nav">
+            <ul>
+                  <li>medical@netbee.ua</li>
+                  <span class="line-bottom"></span>
+                  <li>(048) 784-14-75</li>
+                  <span class="line-bottom"></span>
+                  <li>(095) 286-42-32</li>
+                  <span class="line-bottom"></span>
+                  <li>(095) 286-42-33</li>
+            </ul>
+      </div>
+</div>
+
+<%= render :partial => "search/top-publication"%> <!-- TOP Вакансий и Резюме, URL => show resume/:id and vacancy/:id -->
+
+<%= render "layouts/scope_list" %>

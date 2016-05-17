@@ -1,0 +1,81 @@
+<%= render "layouts/breadcrumbs" %>
+
+<div id="search-result" class="block-with-cap">
+	<% unless @vacancies.empty? %>
+		<div class="cap">
+			<% if @city %>
+				<h1 id="about">Работа <%= "#{@tag_title_by_category} #{@city}" %></h1>
+			<% else %>
+				<h1 id="about">Работа <%= @tag_title_by_category %></h1>
+			<% end %>
+		</div>
+	<% end %>
+	<div class="boxed">
+		<% unless @vacancies.empty? %>
+			<div class="label state-label">
+				<h2 class="title-last-vacancies width-title"><span class="icon-last-vacancies">СПИСОК ВАКАНСИЙ</span></h2>
+				<span class="label-tail-last-vacancies"></span>
+				<%# unless @vacancies.empty? %><!-- <div class="full-label-gray-last-vacancies"></div> --><%# end %>
+			</div>
+		<% else %>
+			<div class="label">
+				<h2 class="title-last-vacancies width-title state-title-label"><span class="icon-last-vacancies">СПИСОК ВАКАНСИЙ</span></h2>
+				<span class="label-tail-last-vacancies"></span>
+				<%# unless @vacancies.empty? %><!-- <div class="full-label-gray-last-vacancies"></div> --><%# end %>
+			</div>
+		<% end %>
+		<table class="search-result" width="100%">
+			<% @vacancies.each do |vacancy| %>	
+				<tr>
+					<td><%= image_tag vacancy.company.logo.url(:search), :class => "photo-employer", :title => "Компания #{vacancy.company.name}. Работа в медицине medical.netbee.ua" %></td>
+					<td><%= link_to vacancy.name, {:controller => "search", :action => "vacancy", :city =>Russian.translit(vacancy.city).parameterize, :scope => Russian.translit(vacancy.category.scope.title).parameterize, :category => Russian.translit(vacancy.category.name).parameterize, :id => vacancy.to_param} %></td>
+					<td><%= link_to vacancy.city, { action: :category, city: translit_helper(vacancy.city) } %></td>
+    				<td><%= vacancy.salary %> грн.</td>
+				</tr>
+			<% end %>
+		</table>
+		 
+		<% if @vacancies.empty? %>
+			<div class="message-full-size">
+				<% if @city %>
+					<h1 id="about">Работа <%= "#{@tag_title_by_category} #{@city}" %></h1>
+				<% else %>
+					<h1 id="about">Работа <%= @tag_title_by_category %></h1>
+				<% end %>
+
+		    	<%= render "link_create_vacancy" %> 
+		    </div>
+	    <% end %>
+	</div>
+</div>
+
+<% unless @category_by_view.description.empty? %>
+	<div id="frame-seo" class="frame-category-profesional">
+	      <div class="boxed">
+	      	<div class="cover_article_show_pag cover-seo">
+	      		<%= image_tag @category_by_view.cover.url(:index), :class => "cover_news", :title => "Работа в медицине medical.netbee.ua" %>
+	      	</div>
+	      	<%= raw @category_by_view.description %>
+	      </div> <!-- .boxed -->
+	</div> <!-- #frame-other -->
+<% end %>
+
+<div class="clearfix"></div>
+
+<div id="frame-other" class="frame-category-profesional">
+      <div class="cap">
+            <h2 id=""><%= @category_by_view.scope.singular("И") %></h2>
+      </div>
+      <div class="boxed">
+      		<ul id="triple">
+			<% Category.where(scope_id: @category_by_view.scope.id ).each do |category| %>
+				<% c = Russian.translit(category.name).parameterize %>
+				<li><%= link_to "#{category.name}", {:controller => :search, :action => "category", :category => c}, title: "Работа #{category.singular("Т").mb_chars.downcase.to_s}" %></li>
+            <% end %>
+           	</ul>
+      </div> <!-- .boxed -->
+</div> <!-- #frame-other -->
+
+<div class="clear"></div>
+
+<%= render "layouts/scope_list" %>

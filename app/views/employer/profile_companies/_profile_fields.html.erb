@@ -1,0 +1,32 @@
+<div class='item'>
+	<%= employer_fields.label :name, "Название компании" %>
+	<div class='field'>
+		<%= employer_fields.text_field :name %>
+	</div>
+</div>
+<div class='item' id="category">
+	<%= employer_fields.label :scope, "Сфера деятельности" %>
+	<div class='field'>
+		<%= collection_select(:company, :scope_id, Scope.all, :id, :title, { :include_blank => true }, {:class => "styled"}) %>
+	</div>
+</div>
+<div class='item'>
+	<%= employer_fields.label :description, "Описание" %>
+	<div class='field'>
+		<%= employer_fields.text_area :description, :id => "some-textarea", :class => 'wysihtml5' %>
+	</div>
+</div>
+<div class='item'>
+	<%= employer_fields.label :site, "Сайт компании" %>
+	<div class='field'>
+		<%= employer_fields.text_field :site %>
+	</div>
+</div>
+<div class='item' style="margin-bottom: 0px;">
+    <%= employer_fields.label 'Логотип компании' %>
+	<div class='field'>
+        <%= image_tag @company.logo.url(:small), :alt => "", :id => "image-path-photo", :title => "Компания #{@company.name}. Работа в медицине medical.netbee.ua" %>
+        <a id="upload-logo-company" class="upload-photo">Загрузить логотип</a>
+    	<%= employer_fields.file_field :logo, :accept => "image/jpeg,image/png,image/gif", :id => "file", :hidden => "hidden" %>
+	</div>
+</div>

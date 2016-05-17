@@ -1,0 +1,58 @@
+ru:
+  views:
+      pagination:
+          previous: "&lt;&lt; Предыдущая"
+          next: "Следующая &gt;&gt;"
+          truncate: "..."
+          last: ""
+          first: ""
+  activerecord:
+      state_machines:
+          states:
+              draft: "Черновик"
+              pending: "Ожидает проверки модератором"
+              wait_company: "Профиль компании на редактировании"
+              published: "Публикуется"
+              hot: "Горячая"
+              vip: "VIP"
+              secret: "Конфиденциально"
+              rejected: "Отклонена модератором"
+              deferred: "Скрыто"
+              archive: "В архиве"
+              default: "Главная"
+      errors:
+          messages:
+              blank: ""
+              accepted: ""
+              invalid: "Неверный email"
+      models:
+          profile: "Профиль"
+      attributes:
+          resume:
+              position: "Желаемая должность"
+              salary: "Желаемая зарплата"
+              city: "Желаемый город"
+              personal_data: "Важное условие"
+          profile:
+              lastname: "Фамилия"
+              firstname: "Имя"
+              surename: "Отчество"
+              phone: "Телефон"
+          experiences:
+              position: "Занимаемая должность"
+              company: "Компания"
+              achievements: "Обязанности, достижения"
+              month_from: "Период работы, (месяц)"
+              year_from: "Период работы (год)"
+              month_till: "Месяц окончания работы"
+              year_till: "Год окончания работы"
+          educations:
+              college: "Название ВУЗа"
+              profession: "Специальность"
+              faculty: "Факультет"
+              diploma: "Диплом/степень"
+              year_till: "Год окончания"
+          article:
+              title: "Заголовок"
+              cover: "Изображение к статье"
+              body: "Основной текст"

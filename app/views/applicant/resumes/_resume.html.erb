@@ -1,0 +1,73 @@
+
+  <!--Сообщение о валидации данных 
+  <%# if @resume.errors.any? %>
+    <div class="error_messages">
+      <ul>
+        <%# for message in @resume.errors.full_messages %>
+          <li><%#= message %></li>
+        <%# end %>
+      </ul>
+    </div>
+  <%# end %>-->
+
+<h2>Профиль</h2>
+<div class="profile">
+    <%= applicant_fields.fields_for :profile do |profile_fields|%>
+			<%= render :partial => 'applicant/resumes/profile_fields', :locals => {:profile => profile_fields.object, :f => profile_fields} %>
+		<% end %>
+</div>
+<span class="line-bottom"></span>
+
+<div class="resume">
+	<h2>Резюме</h2>
+	<div class='item'>
+		<%= applicant_fields.label :position, 'Желаемая должность'%>
+		<div class='field'>
+			<%= applicant_fields.text_field :position, :value => "#{@resume.position}", class: "capitalize_first_wd" %>
+		</div>
+	</div>
+	<div class='item'>
+		<%= applicant_fields.label :city, 'Желаемый город' %>
+		<div class='field'>
+			<%= collection_select(:resume, :city, City.all, :name, :name, {:include_blank => "Выберите город из списка"}, {:id => "combobox"}) %>
+		</div>
+	</div>
+	<div class='item'>
+		<%= applicant_fields.label :salary, 'Желаемая зарплата'%>
+		<div class='field'>
+			<%= applicant_fields.text_field :salary, :value => "#{@resume.salary}", :id => "salary" %>
+			<span class="currency">грн.</span>
+		</div>
+	</div>
+	<span class="line-bottom"></span>
+
+	<h2 id="experience">Опыт работы</h2>				
+
+    <%= applicant_fields.fields_for :experiences do |experience_fields| %>
+    	<%= render :partial => "applicant/resumes/experience_fields", :locals => {:experience => experience_fields.object, :f => experience_fields}  %>
+    <%end %>
+
+	<%= applicant_fields.link_to_add "Добавить место работы", :experiences, :class => "yellow-link", :id => "add-experience" %>
+
+	<div class="clearfix"></div>
+	<span class="line-bottom"></span>
+		
+	<h2 id="education">Образование</h2>
+
+    <%= applicant_fields.fields_for :educations do |education_fields| %>
+    	<%= render :partial => "applicant/resumes/education_fields", :locals => {:education => education_fields.object, :f => education_fields}  %>
+    <% end %>
+
+    <%= applicant_fields.link_to_add "Добавить место учебы", :educations, :class => "yellow-link", :id => "add-education" %>
+	
+	<div class="clearfix"></div>
+	<span class="line-bottom"></span>
+  
+    <h2 id="additionally">Дополнительно</h2>
+		<div class='item'>
+			<%= applicant_fields.label "Еще знаю и умею" %>
+			<div class='field'>
+				<%= applicant_fields.text_area :additional_info, :value => "#{@resume.additional_info}", :id => "some-textarea", :class => 'wysihtml5' %>
+			</div>
+		</div>
+</div>

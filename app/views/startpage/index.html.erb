@@ -1,0 +1,55 @@
+<%= form_tag search_path, method: :post do %>
+	<div class="search"> 
+                <div class="search-box clearfix">
+                    <%= text_field_tag :search, params[:search], :class => "input-text", :placeholder => "Укажите специальность" %>
+                    <%= text_field_tag :city, params[:city], :class => "input-city", :placeholder => "Город" %>
+                    <% if current_user && current_user.employer? %>
+                    	<%= select_tag(:sample, options_for_select([['Резюме', 2], ['Вакансии', 1]], params[:sample]), :class => "styled") %>
+                    <% else %>
+                    	<%= select_tag(:sample, options_for_select([['Вакансии', 1], ['Резюме', 2]], params[:sample]), :class => "styled") %>                    	
+                    <% end %>
+                    <%= submit_tag "Найти", name: nil, :class => "input-sub btn btn-warning", :id => "btn-search", :onclick => "_gaq.push(['_trackEvent','search','send'])", :name => nil %>
+                </div>
+ 	</div> 	
+<% end %>
+		
+ <div class="hot-vacancies">
+      <h4 class="title-hot"><span class="icon-hot">ГОРЯЧИЕ ВАКАНСИИ</span></h4>
+      <span class="label-tail-hot"></span>
+      <%= render :partial => "hot-vacancies" %>
+    </div>
+
+
+
+    <div class="hot-vacancies">
+			<h4 class="title-hot"><span class="icon-hot">ГОРЯЧИЕ ВАКАНСИИ</span></h4>
+			<span class="label-tail-hot"></span>
+			<%= render :partial => "hot-vacancies" %>
+		</div>
+		<div class="last-vacancies">
+			<div class="label">
+				<div class="label-last-vacancies">
+					<h4 class="title-last-vacancies width-title"><span class="icon-last-vacancies">ПОСЛЕДНИЕ ВАКАНСИИ</span></h4>
+					<span class="label-tail-last-vacancies"></span>
+				</div>
+				<div class="label-gray-last-vacancies"></div>
+			</div>
+			<%= render :partial => "last-vacancies" %>
+		</div>
+		<div class="companies">
+			<h4 class="title-companies"><span class="icon-companies">КОМПАНИИ</span></h4>
+			<span class="label-tail-companies"></span>
+			<ul class="logoBlock">
+			<% @companies.each do |company|%>
+			            <li><%= link_to({:controller => "/search", :action => "company", :id => company.to_param}, :title => "Компания #{company.name}") do %>
+			            		<%= image_tag company.logo.url(:vip), :title => "Компания #{company.name}. Работа в медицине medical.netbee.ua", :alt => "#{company.name}", :width => "160px", :height => "90px" %>
+			            	<% end %>
+			            </li>
+			<% end %>
+			</ul>
+			<div class="clear"></div>
+			<div class="link-more" style="position: relative; top: 0px;"><b><%= link_to "Другие компании", companies_url, :onclick =>"_gaq.push(['_trackEvent','more','send'])", title: "Список компаний" %></b></div>
+		</div>
+		<div class="clear"></div>
+
+		<%= render "layouts/scope_list" %>

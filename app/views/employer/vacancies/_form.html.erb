@@ -1,0 +1,52 @@
+<div class='item'>
+	<%= f.label :name, "Название вакансии" %>
+	<div class='field'>
+		<%= f.text_field :name %>
+	</div>
+</div>
+<div class='item', id='category'>
+	<%= f.label :category_id, "Категория" %>
+	<div class='field'>
+		<%= collection_select(:vacancy, :category_id, @category, :id, :name, { :include_blank => true }, {:class => "styled"}) %>
+	</div>
+</div>
+<div class='item'>
+	<%= f.label :city, "Регион" %>
+	<div class='field'>
+		<%= collection_select(:vacancy, :city, City.order("name ASC"), :name, :name, {:include_blank => "Выберите город из списка"}, {:id => "combobox"}) %>
+	</div>
+</div>
+<div class='item'>
+	<%= f.label :salary, "Зараплата" %>
+	<div class='field'>
+		<%= f.text_field :salary, :id => "salary", :class => "salary", :maxlength => "6" %>
+		<span class="currency">грн.</span>
+	</div>
+</div>
+<div class='item'>
+	<%= f.label :experiences, "Опыт" %>
+	<div class='field'>
+		<%= f.text_field :experiences %>
+	</div>
+</div>
+<div class='item'>
+	<%= f.label :timetable, "График работы" %>
+	<div class='field'>
+		<%= f.radio_button :timetable, "5/2", :class => "timetable" %> <span>5/2</span>
+		<%= f.radio_button :timetable, "Посменно", :class => "timetable" %> <span>Посменно</span>
+		<%= f.radio_button :timetable, "Другой вариант", :id => "timetable_radio_button", :class => "timetable" %> <span>Другой вариант</span>
+		<%= f.text_field :timetable_other, :id => "timetable_input" %> 
+	</div>
+</div>
+<div class='item'>
+	<%= f.label :description, "Описание вакансии" %>
+	<div class='field'>
+		<%= f.text_area :description, :id => "some-textarea", :class => 'wysihtml5' %>
+	</div>
+</div>
+<div class='item' id="company-contact">
+	<%= f.label :company_contact_id, "Контакты" %>
+	<div class='field'>
+		<%= f.select("company_contact_id", CompanyContact.where("company_id = ?", @vacancy.company.id ).collect {|p| [ "#{p.name}: #{p.phone}", p.id ] }, { :include_blank => true }, {:class => "styled"})%>
+	</div>
+</div>

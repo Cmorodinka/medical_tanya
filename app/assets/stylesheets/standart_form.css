@@ -1,0 +1,229 @@
+form.standart_form {
+	/*width: 513px;*/
+	width: 603px;
+	float: left;
+}
+form .item {
+    margin-bottom: 25px;
+    position: relative;
+		margin-left: 30px;
+}
+form .item > label {
+	font-size: 14px;
+	width: 180px;
+	display: inline-block;
+	margin: 5px 10px 0 0;
+	vertical-align: top;
+}
+form .field {
+	display: inline-block;
+	position: relative;
+	vertical-align: middle;
+	width: 310px;
+}
+form.standart_form .item .field .field_error > input[type="text"], form.standart_form .item .field .field_error > input[type="email"], form.standart_form .item .field .field_error > input[type="password"], form.standart_form .item .field > input[type="text"], form.standart_form .item .field > input[type="email"], form.standart_form .item .field > input[type="password"], form.standart_form .item .fields .field_error > input[type="text"], form.standart_form .item .fields .field_error > input[type="email"], form.standart_form .item .fields .field_error > input[type="password"], form.standart_form .item .fields > input[type="text"], form.standart_form .item .fields > input[type="email"], form.standart_form .item .fields > input[type="password"] {
+
+    font-family: "PT Sans",Verdana,sans-serif;
+    font-size: 14px;
+    /*height: 30px;*/
+    line-height: 30px;
+    /*margin: 0;
+    padding: 0 5px;*/
+    width: 300px;
+}
+
+img.img-rounded {
+	margin-right: 10px;
+}
+form.standart_form .buttons {	
+	padding: 25px 0 0px 184px;
+}
+
+form.standart_form input[type="radio"], input[type="checkbox"] {
+    cursor: pointer;
+    line-height: normal;
+    margin: 0 5px 2px 0;
+}
+
+form.standart_form .item .field textarea {
+	 width: 300px; 
+	 height: 150px;
+}
+.recent_from, .recent_till {
+	width: 96px;
+}
+
+form.standart_form div.student {
+	/*margin-left: 176px;*/
+	width: 92px;
+	float: right;
+}
+form.standart_form div.student input[type="checkbox"]{
+	float: left;
+}
+
+input.recent_till_education {
+	width: 80px !important;
+	float: left;
+}
+
+input[type="submit"].save_edit_button {
+	background-color: #99D2DE;
+	color: #FFFFFF;
+	border-radius: 5px 5px 5px 5px;
+	margin: 2px 10px 2px 0;
+	padding: 6px 12px 6px 12px;
+	line-height: 14px;
+	border-width: 0px;
+	float: left;
+	font-size: 13px;
+	
+}
+
+input[type="submit"].save_edit_button:active {
+	color: #333333;
+}
+
+#person-resume + ul.nav {
+	margin-top: 25px;
+}
+
+input.salary {
+	width: 80px !important;
+	float: left;
+	margin-right: 25px !important;
+}
+
+ div#ui-datepicker-div {
+	    left: 501.567px !important;
+ }
+
+ a.add_fields_for {
+    /*color: #3CA200;*/
+		margin-top: 10px;
+ }
+ 
+span.remove_field {
+    background: none repeat scroll 0 0 #FFFFFF;
+    color: #949494;
+    left: 258px;
+    padding-left: 10px;
+    position: absolute;
+    text-align: left;
+    top: 9px;
+    width: 80px;
+}
+
+a.remove_nested_fields {
+      background-image: url("/assets/icon-delete.png");
+      background-position: 0 50%;
+      background-repeat: no-repeat;
+      padding-bottom: 3px;
+      padding-left: 20px;
+}
+
+a.add_fields_for {
+		  color: #71C1D1;	
+			font-weight: bold;
+}
+
+hr.nav-line-buttom {
+	margin: 10px 0 20px 0;
+}
+
+select.month_from, select.month_till {
+	width: 97px !important;
+}
+
+input.year_from, input.year_till {
+	width: 31px !important;
+}
+
+.span_current_workplace {
+	width: 150px;
+	float: right;
+	margin-left: 0px;
+}
+
+.span_current_workplace {
+	margin-top: 8px;
+}
+
+input[type="checkbox"].current_workplace {
+	float: left;
+	margin-top: 3px;
+}
+input[type="checkbox"].current_workplace + label {
+	font-size: 12px !important;
+}
+
+.field_with_errors {
+    display: inline;
+}
+ 
+										/*--=  div.field_with_errors =--*/ 
+
+div.field_with_errors > label {	
+	display: inline-block;
+    font-size: 14px;
+    margin: 5px 10px 0 0;
+    vertical-align: top;
+    width: 180px;
+}
+
+div.field_with_errors > input.year_till, div.field_with_errors > input.year_from {
+	width: 31px !important;
+    border-color: #B94A48 !important;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset !important;
+}
+
+div.field_with_errors input.year_till:focus, div.field_with_errors input.year_from:focus {
+	width: 31px !important;
+    border-color: #953B39 !important;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 6px #D59392 !important;
+}
+
+
+div.field_with_errors input {
+	width: 300px !important;
+    border-color: #B94A48 !important;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset !important;
+}
+
+div.field_with_errors input:focus {
+	width: 300px !important;
+    border-color: #953B39 !important;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 6px #D59392 !important;
+}
+
+div.field_with_errors textarea {
+	 border-color: #953B39 !important;
+     box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 6px #D59392 !important;
+}
+
+										/*--=  /div.field_with_errors =--*/
+
+div.company-contact {
+	margin-bottom: 25px;
+}
+
+#timetable_input {
+	margin-top: 25px;
+}
+
+div.select2-drop-active {
+	left: 271.567px !important;
+}
+
+div.select2-offscreen {
+	display: none !important;
+}
+
+div.add_company_contacts {
+	margin: 15px 0 25px 0;
+}
+
+.body_letter {
+	height: 150px;
+	width:	590px;
+}

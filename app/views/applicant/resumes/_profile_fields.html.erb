@@ -1,0 +1,60 @@
+<!-- if необходимо использовать для того, чтобы, при ошибке валидации, данные профиля не пропадали из полей форм, при первом создании резюме -->
+
+<div class='item'>
+	<%= f.label :lastname, 'Фамилия' %>
+	<div class='field'>
+		<% if @profile.lastname.nil? %>
+			<%= f.text_field :lastname, class: "capitalize"  %>
+		<% else %>
+			<%= f.text_field :lastname, :value => "#{@profile.lastname}", class: "capitalize" %>
+		<% end %>
+	</div>
+</div>
+<div class='item'>
+	<%= f.label :firstname, 'Имя' %>
+	<div class='field'>
+		<% if @profile.firstname.nil? %>
+			<%= f.text_field :firstname, class: "capitalize"  %>
+		<% else %>
+			<%= f.text_field :firstname, :value => "#{@profile.firstname}", class: "capitalize"  %>
+		<% end %>
+	</div>
+</div>
+<div class='item'>
+	<%= f.label :surename, 'Отчество' %>
+	<div class='field'>
+		<% if @profile.surename.nil? %>
+			<%= f.text_field :surename, class: "capitalize"  %>
+		<% else %>
+			<%= f.text_field :surename, :value => "#{@profile.surename}", class: "capitalize" %>
+		<% end %>
+	</div>
+</div>
+<div class='item'>
+	<%= f.label :date, 'Дата рождения' %>
+	<div class='field'>
+		<% if @profile.date.nil? %>
+			<%= f.text_field :date, :class => "datepicker", :placeholder => "дд.мм.гггг" %>
+		<% else %>
+			<%= f.text_field :date, :value => "#{@profile.date.strftime('%d.%m.%Y')}", :class => "datepicker", :placeholder => "дд.мм.гггг" %>
+		<% end %>
+	</div>
+</div>
+<div class='item'>
+	<%= f.label :phone, 'Мобильный телефон' %>
+	<div class='field'>
+		<% if @profile.phone.nil? %>
+			<%= f.text_field :phone, :type => "tel", :id => "phone", :placeholder => "+xx(xxx) xxx xx xx" %>
+		<% else %>
+			<%= f.text_field :phone, :value => "#{@profile.phone}", :type => "tel", :id => "phone", :placeholder => "+xx(0xx) xxx xx xx" %>
+		<% end %>
+	</div>
+</div>
+    <div class='item' style="margin-bottom: 0px;">
+      <%= f.label 'Фото' %>
+        <div class='field'>
+          <%= image_tag @profile.photo.url(:small), :alt => "", :id => "image-path-photo", :title => "#{@profile.lastname} #{@profile.firstname} #{@profile.surename}. Работа в медицине medical.netbee.ua" %>
+          <a id="upload-photo-applicant" class="upload-photo">Загрузить</a>
+          <%= f.file_field :photo, :accept => "image/jpeg,image/png,image/gif", :id => "file", :hidden => "hidden" %>
+        </div>
+    </div>

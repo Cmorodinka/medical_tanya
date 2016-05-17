@@ -1,0 +1,32 @@
+        <div class="link-navigate">
+            <h2 class="title">Регистрация</h2>
+            <%= link_to "Вход", login_url %>
+        </div>
+        <div id="content">
+        <%= form_for @account do |f| %>
+          <% if @account.errors.any? || flash[:notice] %>
+            <div class="error_messages">
+                <div class="alert alert-block alert-success">
+                      <p id="notice" ><%= flash[:notice] %></p>
+                      <% for message in @account.errors[:email] %>
+                        <p id="notice" ><%= message %></p>
+                      <% end %>
+                </div>
+            </div>
+          <% end %>
+          <div class="item">
+            <div class="field">
+              <%= f.label :email %>
+              <%= f.text_field :email, :type => :email %>
+            </div>
+          </div>
+          <div class="item">
+            <div class="field">
+              <%= f.label :password, "Пароль" %>
+              <%= f.password_field :password %>
+            </div>
+          </div>
+          <br/>
+          <%= f.submit "Зарегистрироваться", :class => "input-sub btn btn-warning", :onclick => "_gaq.push(['_trackEvent', 'reg', 'send'])" %>
+        <% end %>
+        </div><!-- #content-->

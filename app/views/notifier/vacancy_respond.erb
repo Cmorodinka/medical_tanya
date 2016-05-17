@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+  </head>
+  <body>
+    <p>Здравствуйте, компания "<%= @vacancy.company.name %>".</p>
+    <p>Вы получили отклик на вакансию <%= link_to @vacancy.name, :controller => "/search", :action => "vacancy", :id => @vacancy.id, :only_path => false %> от <%= link_to @fullNameApplicant, :controller => "/search", :action => "resume", :id => @applicant.resume.id, :only_path => false %>. 
+    </p>
+    <p>Для просмотра резюме пройдите по ссылке.</p>
+    <p><%= url_for(:host => "medical.netbee.ua", :controller => "/search", :action => "resume", :id => @applicant.resume.id) %></p>
+    <br/>
+    <p>С уважением, команда Netbee.</p>
+  </body>
+</html>
+

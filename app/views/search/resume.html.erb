@@ -1,0 +1,197 @@
+<script>
+$(document).ready(function(){
+	var button = $("#button-bottom").index();
+	if (button == "-1") {
+		$("tr:last-child th.line-bottom").remove();
+		$(".paper").css("margin-bottom", "15px");	
+	}
+});
+</script>
+
+<div id="frame">
+	<div class="cap">
+		<% if current_user %>
+		      <% if @resume.employers.where(:id => current_user.id).empty? %>
+					<h2 id="about"><%= @resume.position %></h2>
+		      <% else %>
+		            <h2 id="about">Это резюме добавлено в<%= link_to "Избранные резюме", employer_my_resumes_index_url %></h2>
+		      <% end %>
+		<% else %>
+			<h2 id="about"><%= @resume.position %></h2>
+		<% end %>
+	</div>
+	<div class="boxed" id="cabinet">
+		<% if flash[:notice] %>
+		      <br>
+		      <div class="alert alert-block alert-success">
+		            <p id="notice" ><%= flash[:notice] %></p>
+		      </div>
+		<% end %>
+		<table cellpadding="0" cellspacing="0" class="photo-name-applicant">
+			<tr>
+				<td class="photo-profile"><%= image_tag @resume.profile.photo.url(:show), :class => "photo-applicant" %></td>
+				<td>
+					<% if current_user && employer! %>
+						<h2><%= @fullName %></h2>
+					<% else %>
+						<h2><%= @resume.profile.firstname%></h2>
+					<% end %>
+				</td>
+			</tr>
+		</table>
+    	<table class="paper" border="0" cellpadding="10">
+                        <tr>
+                        	<td>Желаемая должность</td>
+	                        <td><%= @resume.position %></td>
+                        </tr>
+						<tr>
+							<td>Желаемая зарплата</td>
+							<td><%= salary_helper(@resume) %></td>
+						</tr>
+                        <tr>
+                        	<td>Регион</td>
+                        	<td><%= @resume.city %></td>
+                        </tr>
+                        <% if current_user && employer! %>
+	                        <tr>
+	                        	<td>Электронная почта</td>
+	                        	<td><%= @resume.applicant.email %></td>
+	                        </tr>
+	                        <tr>
+	                        	<td>Телефон</td>
+	                        	<td><%= @resume.profile.phone %></td>
+	                        </tr>
+                        <% elsif current_user && current_user.employer? && !current_user.company %>
+                        	<tr>
+	                        	<td>Электронная почта</td>
+	                        	<td><b><%= link_to "Создайте профиль",new_employer_profile_company_path %> компании, </b> </td>
+	                        </tr>
+	                        <tr>
+	                        	<td>Телефон</td>
+	                        	<td><b>чтобы увидеть контакты соискателя.</b></td>
+	                        </tr>
+	                    <% elsif current_user && current_user.applicant? %>
+                        	<tr>
+	                        	<td>Электронная почта</td>
+	                        	<td><b>Контакты сосикателя могут видеть только</b> </td>
+	                        </tr>
+	                        <tr>
+	                        	<td>Телефон</td>
+	                        	<td><b><%= link_to "зарегистрированные", signup_url %> работодатели.</b></td>
+	                        </tr>
+	                    <% else %>
+	                    	<tr>
+	                        	<td>Электронная почта</td>
+	                        	<td><b><%= link_to "Войдите", login_url %> или <%= link_to "Зарегистрируйтесь", signup_url %>, </b> </td>
+	                        </tr>
+	                        <tr>
+	                        	<td>Телефон</td>
+	                        	<td><b>чтобы увидеть контакты соискателя.</b></td>
+	                        </tr>
+	                    <% end %>
+                        <tr>
+                        	<th colspan="2" class="line-bottom"></th>
+                        </tr>
+                        <tr>
+							<% if @resume.experiences.empty? %>
+								<td><h3>Опыт работы</h3></td>
+								<td>Нет опыта работы</td>
+						</tr>
+							<% else %>
+	                        	<td><h3>Опыт работы</h3></td>
+	                        	<td></td>
+       					</tr>	
+								<% @resume.experiences.each do |experience| %>
+								<tr>
+									<td><%= experience.position %></td>
+									<td><p><%= experience.company %></p>
+									<%= "#{experience.month_from} #{experience.year_from}" %> – 
+										<% if experience.current_workplace %> 
+											настоящее время 
+										<% else %> 
+											<%= "#{experience.month_till}  #{experience.year_till}" %>
+										<% end %>
+										<p><%= raw experience.achievements %></p>
+									</td>
+								</tr>
+								<tr class="clear-border"><td></td><td></td></tr>
+								<% end %>
+							<% end %>
+
+						<% unless @resume.educations.empty? %>
+						<tr>
+                        	<th colspan="2" class="line-bottom"></th>
+                        </tr>
+						<tr>
+							<td><h3>Образование<h3></td>
+							<td><td>
+						</tr>
+							<% @resume.educations.each do |education| %>			
+							<tr>
+							<td><%= "#{education.college}" %></td>
+							<td style="border: 0;">
+								<% unless education.profession.empty? %>
+									<%= "специальность #{education.profession}" %>
+								<% end %>
+
+								<% unless education.faculty.empty? %> 
+									<p><%= "факультет #{education.faculty}" %></p>
+								<% end %> 
+
+								<p><%= "#{education.diploma} -" %> 
+
+								<% if education.student %> 
+									еще учусь. 
+								<% else %> 
+									<%= "год окончания #{education.year_till}"%>
+								<% end %>
+								</p>
+								
+							</td>
+							</tr>
+						<tr class="clear-border"><td></td><td></td></tr>
+
+							<% end %>
+					<% end %>
+
+					<% if @resume.additional_info != "" %>
+					<tr>
+                      	<th colspan="2" class="line-bottom"></th>
+                    </tr>
+						<tr>
+							<td><h3>Дополнительно</h3></td>
+                        	<td><%= raw @resume.additional_info %></td>
+                        </tr>
+					<% end %>
+					<tr>
+					      <th colspan="2" class="line-bottom"></th>
+					</tr>
+		</table> 
+				<% if current_user && current_user.employer? && current_user.company != nil %>
+				      <% if @resume.employers.where(:id => current_user.id).empty? %>
+				      <div id="button-bottom">
+				            <%= link_to "Добавить в избранное", employer_profile_companies_add_resume_responded_path(:resume_id => @resume.id), :class => "input-sub btn btn-warning", :id => "btn-yellow-for-link" %>
+				            <div class="clear"></div>
+				      </div>
+				      <% end %>
+				<% end %>       
+	</div> <!-- .boxed #cabinet-->
+</div> <!-- #frame -->
+<div id="account-contacts">
+    <div class="cap">
+        <p>Ваш менеджер</p>
+    </div>
+    <div class="boxed-nav">
+        <ul>
+    		<li>medical@netbee.ua</li>
+            <span class="line-bottom"></span>
+            <li>(048) 784-14-75</li>
+            <span class="line-bottom"></span>
+            <li>(095) 286-42-32</li>
+            <span class="line-bottom"></span>
+            <li>(095) 286-42-33</li>
+		</ul>
+    </div>
+</div>
+
+<%= render :partial => "search/top-publication"%> <!-- TOP Вакансий и Резюме, URL => show resume/:id and vacancy/:id -->

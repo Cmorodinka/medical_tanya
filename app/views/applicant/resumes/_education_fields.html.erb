@@ -1,0 +1,52 @@
+<script>
+//FIXME: В разделах, в html.erb файлах, образование и опыт работы повторяется работы скриптов
+
+$(".student_now:checkbox").click(function(){
+    var check = $(this).attr('checked');
+    var parent_date = $(this).parent().parent().find(".year_till");
+    if (check == "checked") {
+        $(parent_date).css('display', 'none');
+    }
+    else{
+        $(parent_date).css('display', 'inline');
+    }
+ });
+</script>
+	<div class='item'>
+		<%= f.label :college, "Название ВУЗа"%>
+		<div class='field'>
+			<%= f.text_field :college, :value => f.object.college, :class=>"college validate", :default_value => "Название учебного заведения" %>
+		</div>
+	</div>
+	<div class='item'>
+		<%= f.label :profession, "Специальность" %>
+		<div class='field'>
+			<%= f.text_field :profession, :value => f.object.profession, :class=>"recent_company validate", :default_value => "Специальность" %>
+		</div>
+	</div>
+	<div class='item'>
+		<%= f.label :faculty, "Факультет"%>
+		<div class='field'>
+			<%= f.text_field :faculty, :value => f.object.faculty, :class=>"validate", :default_value => "Факультет" %>
+		</div>
+	</div>
+	<div class='item'>
+		<%= f.label :diploma, "Диплом/степень"%>
+		<div class='field'>
+			<%= f.text_field :diploma, :class => "diploma validate ", :default_value => "Диплом/степень" %>
+		</div>
+	</div>
+	<div class='item'>	
+   		<%= f.label :year_till, "Год окончания:" %>	
+		<div class='field'>		
+			<%# f.text_field :year_till, :class=> "only_year recent_till_education year_till", :id => "education-year-till" %>
+
+			<div class="dateTillEducation"><%= f.select(:year_till, year_list_helper, {:include_blank => "Год"}, {:class => "styled" }) %></div>
+			<div class='student'>
+				<%= f.check_box(:student, {:class => "student_now"}, "true", "false") %>
+				<%= f.label :student, "Еще учусь" %>
+			</div>
+		</div>
+	</div>
+<%= f.hidden_field :_destroy %><%= f.link_to_remove "Удалить место учебы", :class => "red-link" %>
+<div class="clearfix"></div>

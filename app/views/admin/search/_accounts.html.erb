@@ -1,0 +1,48 @@
+<div id="search-result">
+			<!--<h4 class="title-last-vacancies"><span class="icon-last-vacancies">ПОЛЬЗОВАТЕЛИ</span></h4>
+			<span class="label-tail-last-vacancies"></span>-->
+			<table id="admin-search-result-account" class="search-result" width="100%">
+				<tr>
+					<th>Email</th>
+					<th>Тип аккаунта</th>
+					<th>Активация</th>
+					<th>Посещений</th>
+					<th>Последнее</th>
+				</tr>
+				<% @accounts.each do |account| %>	
+					<tr id=<%="account_#{account.id}"%>>
+						<td>
+		    			<% if account.employer? %>
+		    				<% company = Company.find_by_employer_id(account.id)%>
+		    				<%= link_to_unless(company.nil?, account.email, {:controller => "/admin/companies/profile", :action => "edit", :id => company} ) do
+		    				 		account.email
+		    					end %>
+		    			<% elsif account.applicant? %>
+		    				<% resume = Resume.find_by_applicant_id(account.id)%>
+		    					<%= link_to_unless(resume.nil?, account.email, {:controller => "/admin/resumes", :action => "edit", :id => resume} ) do 
+		    						account.email
+		    						end %>
+		    			<% else %>
+		    				<%= account.email %>
+		    			<% end %>
+		    			</td>
+		    			<td><%= account.account_type %></td>
+		    			<td><%= if account.active? then "Активирован" else "Не активирован" end%></td>
+		    			<td><%= account.session_count %></td>
+		    			<td>
+		    				<% unless account.session_last_time.nil? %>
+		    					<%= account.session_last_time.localtime.strftime("%F %H:%M") if account.active? %>
+		    				<% end %>
+		    				<%= link_to({:controller => "/admin/search", :action => "destroy_account_respond", :id => account.id}, :class => "delte-vacancy-respond", :confirm => "Вы уверены, что хотите удалить аккаунт #{account.email}", method: :delete, remote: true) do %>
+                  				<img src="/assets/delete.png" class="delte-vacancy-respond">
+                  			<% end %>
+                  			<%= link_to({:controller => "/admin/search", :action => "choice_user_for_admin", :token => account.token}, :class => "delte-vacancy-respond", :confirm => "Вы хотите залогиниться как #{account.email}", :target => "_blank
+") do %>
+                  				<img src="/assets/my-profile.png" class=""></a>
+                  			<% end %>
+		    			</td>
+					</tr>
+				<% end %>
+			</table>
+			<div class="link-more"><b><%= paginate @accounts %></div>
+</div>

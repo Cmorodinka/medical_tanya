@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title><%= @title || "Сайт трудоустройства medical.netbee.ua"%></title>
+  <meta name="keywords" content="работа, вакансии, резюме, медицина, фармацевтика, здравоохранение, Украина, netbee">
+  <!--[if IE]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+  <meta name="robots" content="noindex, follow" >
+  <%= favicon_link_tag 'favicon.ico' %>
+  <%= stylesheet_link_tag "style", "bootstrap_buttons", "selectbox", "bootstrap-alerts", :media => "all" %>
+  <%= javascript_include_tag "selectbox" %>
+  <%= csrf_meta_tags %>
+
+  <!-- Google Tag Manager -->
+   <noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-8KW8"
+   height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+   <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+   new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+   j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+   '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+   })(window,document,'script','dataLayer','GTM-8KW8');</script>
+   <!-- End Google Tag Manager -->
+
+  <style>
+    .alert-block {
+      border-radius: 0 0 0 0;
+      left: -28px;
+      padding-left: 27px;
+      padding-right: 26px;
+      position: relative;
+      top: 4px;
+      width: 356px;
+    }
+    .alert-success {
+      background-color: #F5F3F1;
+      border-color: #F5F3F1;
+    }
+    #notice {
+      color: #2C2B30;
+    }
+  </style>
+</head>
+<body>
+<div id="wrapper">
+  <div id="small-block">
+    <span class="logo"><a href="/"><img src="/assets/logo-netbee.png" alt="Логотип medical.netbee.ua" title="Логотип. Работа в медицине medical.netbee.ua"></a></span>
+    <div id="layout">
+			     <%= yield %>
+	  	<div class="enter-with">
+        	<div class="title">Войти с помощью</div>
+        	<div class="icon-small">
+            <img class="facebook" src="/assets/icon-facebook-small.png" alt="facebook">
+	          <img class="twitter" src="/assets/icon-twitter-small.png" alt="twitter">
+	          <img class="vk" src="/assets/icon-vk-small.png" alt="vk">
+	          <img class="google" src="/assets/icon-google-small.png">
+        	</div>
+      	</div>
+    </div><!--#layout-->
+  </div><!-- #small_block-->
+</div><!-- #wrapper -->
+</body>
+</html>

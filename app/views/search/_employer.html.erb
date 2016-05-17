@@ -1,0 +1,22 @@
+<div id="search-result">
+			<div id="label">
+				<div class="label-search-result">
+					<h2 class="title-last-vacancies"><span class="icon-last-vacancies width-title">СПИСОК РЕЗЮМЕ</span></h2>
+					<span class="label-tail-last-vacancies"></span>
+				</div>
+				<div class="label-gray"></div>
+			</div>
+			<table class="search-result" width="100%">
+				<% @resumes.each do |resume| %>	
+					<tr>
+						<td><%= image_tag resume.profile.photo.url(:search), :class => "photo-applicant", :title => "Резюме #{resume.position}. Работа в медицине medical.netbee.ua" %></td>
+						<td><%= link_to resume.position, :controller => :search, :action => :resume, :id => resume.to_param %></td>
+		  				<td><%= resume.city %></td>
+		    			<td><%= salary_helper(resume) %></td>
+					</tr>
+				<% end %>
+			</table>
+			<div class="link-more"><b><%= paginate @resumes %></b></div>
+			<!-- <div class="link-more"><b><a href="#" onclick="_gaq.push(['_trackEvent','more','send'])">Показать еще</a></b></div> -->
+</div>
+
