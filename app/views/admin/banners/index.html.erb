@@ -1,0 +1,57 @@
+<!-- <h1>Listing admin_banners</h1>
+
+<table>
+  <tr>
+    <th>Title</th>
+    <th>Img url</th>
+    <th>Link to</th>
+    <th>Description</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @admin_banners.each do |admin_banner| %>
+  <tr>
+    <td><%= admin_banner.title %></td>
+    <td><%= image_tag(admin_banner.img_url, class: 'list_image') %></td>
+    <td><%= admin_banner.link_to %></td>
+    <td><%= admin_banner.description %></td>
+    <td><%= link_to 'Show', admin_banner %></td>
+    <td><%= link_to 'Edit', edit_admin_banner_path(admin_banner) %></td>
+    <td><%= link_to 'Destroy', admin_banner, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Banner', new_admin_banner_path %>
+ -->
+
+<% a = 0%>
+<%= link_to "Добавить баннер", new_admin_banner_url %>
+
+<h3 class="banner">Список баннеров</h3>
+
+<% unless @admin_banners.empty? %>
+  <table class="table banners">  
+    <tr>
+      <th></th>
+      <th>Название</th>
+      <th>Превью</th>
+      <th>Активен?</th>
+      <th>Действия</th>
+    </tr>
+    <% @admin_banners.each do |admin_banner|%>
+    <tr id=<%="banner_#{admin_banner.id}"%>>
+      <td style="width:10px"><%= a += 1%></td>
+      <td style="width:150px"><%= link_to admin_banner.title, edit_admin_banner_path(admin_banner) %></td>
+      <td style="width:450px; height:100px"><%= image_tag(admin_banner.img_url, size:'300x50') %></td>
+      <td></td>
+      <td><%= link_to "Редактировать", edit_admin_banner_path(admin_banner) %> | <%= link_to "Удалить", admin_banner_path(admin_banner.id), :method => :delete, :confirm => "Удалить баннер?"%></td>
+    </tr>
+    <% end %>
+  </table>
+<% end %>
+

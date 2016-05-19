@@ -1,4 +1,6 @@
 Medical::Application.routes.draw do
+  namespace :admin do resources :banners end
+
   root :to => 'startpage#index'
 
   match "/admin" => redirect("/admin/companies")

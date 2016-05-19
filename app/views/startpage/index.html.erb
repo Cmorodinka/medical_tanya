@@ -13,14 +13,19 @@
  	</div> 	
 <% end %>
 		
-    <div class="banner_730x90">
-      <a href="http://medical.netbee.ua/">
-        <img class="banner_730_90_background" title="" src="/assets/banner_medical_big.png" alt="Medical" data-original-title="Работа в медицине medical.netbee.ua">
-      </a>
-    </div>
 
+<!--    <div class="banner_730x90">
+   <% @companies.each do |company|%>
+      <%= image_tag company.logo.url(:vip), :title => "Компания #{company.name}. Работа в медицине medical.netbee.ua", :alt => "#{company.name}", :width => "160px", :height => "90px" %>
+    <%end%>  
+  </div> -->
+  <div class="banner_730x90">
+   <% @admin_banners.each do |admin_banner|%>
+        <%= image_tag(admin_banner.img_url, size:'300x50')%>
+      <% end %>
+  </div>
 
-    <div class="hot-vacancies">
+  <div class="hot-vacancies">
 			<h4 class="title-hot"><span class="icon-hot">ГОРЯЧИЕ ВАКАНСИИ</span></h4>
 			<span class="label-tail-hot"></span>
 			<%= render :partial => "hot-vacancies" %>
