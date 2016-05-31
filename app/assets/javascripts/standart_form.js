@@ -105,7 +105,9 @@ $(document).ready(function(){
 	    if (v != '' ) {
 	        $(".photo-msg").remove();
 	        $("#upload-photo-applicant").before('<p class="photo-msg"> Фото будет загружено после сохранения</p>');
-			$("#upload-photo-applicant").text("Изменить фото");	
+			$("#upload-photo-applicant").text("Изменить фото");
+				$("#upload-banner").before('<p class="photo-msg"> Баннер будет загружен после сохранения</p>');
+			$("#upload-banner").text("Изменить баннер");		
 	        $("#upload-logo-company").before('<p class="photo-msg"> Логотип будет загружен после сохранения</p>');    
 	   		$("#upload-logo-company").text("Изменить логотип");
 			$("#upload-cover").before('<p class="photo-msg"> Фото будет загружено после сохранения</p>');
