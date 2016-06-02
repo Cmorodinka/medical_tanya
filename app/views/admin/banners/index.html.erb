@@ -8,15 +8,15 @@
       <th></th>
       <th>Название</th>
       <th>Превью</th>
-      <th>Активен?</th>
+      <th>Активен c</th>
       <th>Действия</th>
     </tr>
     <% @admin_banners.each do |admin_banner|%>
     <tr id=<%="banner_#{admin_banner.id}"%>>
       <td style="width:10px"><%= a += 1%></td>
       <td style="width:150px"><%= link_to admin_banner.title, edit_admin_banner_path(admin_banner) %></td>
-      <td style="width:450px; height:100px"><%= image_tag(admin_banner.banner_img(:small)) %></td>
-      <td><%= if admin_banner.active? then "Да" else "Нет" end%></td>
+      <td style="width:450px; height:100px"><%= image_tag admin_banner.banner_img.url(:small) %></td>
+      <td><%= if admin_banner.active? then "#{admin_banner.started_at}" else "Не активен" end%></td>
       <td><%= link_to "Редактировать", edit_admin_banner_path(admin_banner) %> | <%= link_to "Удалить", admin_banner_path(admin_banner.id), :method => :delete, :confirm => "Удалить баннер?"%></td>
     </tr>
     <% end %>

@@ -6,7 +6,9 @@ class Admin::BannersController < ApplicationController
 
   skip_before_filter :require_login
 
-  after_filter  :active, :only => [ :new, :edit, :update ]
+  # after_filter  :active, :only => [ :update ]
+  before_filter :banner_params
+  before_filter :expired_banners
   
   # GET /admin/banners
   # GET /admin/banners.json
@@ -37,6 +39,7 @@ class Admin::BannersController < ApplicationController
   # POST /admin/banners.json
   def create
     @admin_banner = Admin::Banner.new(params[:admin_banner])
+    banner_params[:active] ? @admin_banner.started_at = DateTime.now() : @admin_banner.started_at = nil
 
     respond_to do |format|
       if @admin_banner.save
@@ -53,7 +56,9 @@ class Admin::BannersController < ApplicationController
   # PUT /admin/banners/1.json
   def update
     @admin_banner = Admin::Banner.find(params[:id])
-
+    #params[:admin_banner][:active] ? @admin_banner.started_at = DateTime.now() : @admin_banner.started_at = nil
+    banner_params[:active] ? @admin_banner.started_at = DateTime.now() : @admin_banner.started_at = nil
+ 
     respond_to do |format|
       if @admin_banner.update_attributes(params[:admin_banner])
         format.html { redirect_to admin_banners_url, notice: "Баннер был успешно обновлен" }
@@ -77,14 +82,16 @@ class Admin::BannersController < ApplicationController
     end
   end
 
-  def active
-    if params[:active]
-      @admin_banner.approve_active   
-      banners = Admin::Banner.active.all
-      # banners[4..-1].each { |b| b.update_attribute(:active, 'false') }
-    end
+  def banner_params
+    params[:admin_banner]
   end
 
-
+  def expired_banners
+   @expired_banners = Admin::Banner.where("started_at < ?", (DateTime.now() - 1.month)).all
+   @expired_banners.each do |e|
+     e.update_attribute(:active, 'false')
+   end
+  end 
 
 end
+
