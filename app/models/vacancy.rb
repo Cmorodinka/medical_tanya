@@ -14,7 +14,7 @@ class Vacancy < ActiveRecord::Base
 
   validates_presence_of :category_id, :city, :description, :experiences, :name, :salary, :timetable, :company_contact_id
 
-	define_index do
+  define_index do
 		indexes name 
     indexes publicated_at, sortable: true
 		indexes city

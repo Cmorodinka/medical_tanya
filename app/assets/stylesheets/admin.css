@@ -125,6 +125,16 @@ table#admin-search-result-account tr td {
 	height: 50px;
 }
 
+table#admin-search-result-company tr td {
+  width: auto;
+  background: none;
+  text-align: left;
+}
+
+#admin-search-result-company tr th {
+  height: 50px;
+}
+
 #search-admin {
 	border: 1px solid #DADBDB;
 	box-shadow: none;
