@@ -292,9 +292,46 @@ input[type="submit"].input-sub {
 	padding: 8px 12px 0px;
 }
 
+/*----------------------------------Баннер на главной-------------------------------------*/
+.banner_730x90 {
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 20px;
+  position: relative;
+  height: 100px;
+  width: 981px;
+  border: 1px solid #dadbdb;
+  background-color: #ffffff;
+  border-radius: 14px;
+  box-shadow: inset 0 -3px 0 0 #dadbdb;*/
+}
+
+.banner_730x90 img {
+    background-attachment: scroll;
+    background-clip: border-box;
+    background-color: #FFFFFF;
+    background-image: none;
+    background-origin: padding-box;
+    background-position: 0 0;
+    background-repeat: repeat;
+    background-size: auto auto;
+    float: center;
+    margin: 5px 125px;
+    border: medium none;
+    border-radius: 9px 9px 9px 9px;
+}
+
+.banner_730x90 a {
+    border: 0;
+    outline: none;
+    text-decoration: none;
+}
+
+/*----------------------------------Горячие вакансии-------------------------------------*/
+
 .hot-vacancies {
 	position: relative;
-	margin-top: 30px;
+	margin-top: 20px;
 	height: 172px;
 	width: 981px;
 	border: 1px solid #dadbdb;
@@ -331,7 +368,7 @@ input[type="submit"].input-sub {
 
 .last-vacancies {
 	position: relative;
-	margin-top: 30px;
+	margin-top: 20px;
 	width: 481px;
 	height: 622px;
 	border: 1px solid #dadbdb;
@@ -374,7 +411,7 @@ input[type="submit"].input-sub {
     top: 18px;
 }
 .companies {
-	margin: 30px 0 0 15px;
+	margin: 20px 0 0 15px;
 	width: 481px;
 	height: 622px;
 	border: 1px solid #dadbdb;
@@ -467,7 +504,7 @@ table.vacancies tbody tr td:nth-of-type(even) {
 }
 
 div.last-vacancies .link-more {
-	background-color: #F7F7F7;
+	background-color: 00000;
 	height: 52px;
 	margin: 0px 157px 0px 183px;
 	padding-top: 26px;

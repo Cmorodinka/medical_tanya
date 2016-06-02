@@ -12,5 +12,6 @@ class StartpageController < ApplicationController
 		@companies = Company.where(:state => "vip").sort_by { rand }.slice(0..9)
 		
 		@header = "<h1 class='header-start-page'>Работа в медицине.</h1>"
+    @banner = Admin::Banner.active.sample
 	end
 end

@@ -12,8 +12,14 @@
                 </div>
  	</div> 	
 <% end %>
-		
-    <div class="hot-vacancies">
+ 
+   <div class="banner_730x90">
+      <%= link_to @banner.link_to do %>
+        <%= image_tag @banner.banner_img.url(:big), :title => @banner.title, :width => "730px", :height => "90px" %>
+      <% end %>
+  </div>
+
+  <div class="hot-vacancies">
 			<h4 class="title-hot"><span class="icon-hot">ГОРЯЧИЕ ВАКАНСИИ</span></h4>
 			<span class="label-tail-hot"></span>
 			<%= render :partial => "hot-vacancies" %>

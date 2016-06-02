@@ -44,3 +44,5 @@ if City.all.empty?
 else 
 	puts "City not nil!"
 end
+    
+ Admin::Banner.create(title: "Medical.netbee.ua", link_to: "http://www.medical.netbee.ua", active: true, started_at: "2099-01-01 12:12:12")

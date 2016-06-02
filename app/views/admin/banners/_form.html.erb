@@ -1,0 +1,42 @@
+<%= form_for(@admin_banner) do |f| %>
+  <% if @admin_banner.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@admin_banner.errors.count, "error") %> prohibited this admin_banner from being saved:</h2>
+
+      <ul>
+      <% @admin_banner.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label "Название" %><br />
+    <%= f.text_field :title%>
+  </div><br />
+  <div class='field'>
+     <a id="upload-banner" class="upload-photo">Загрузить баннер</a>
+     <%= f.file_field :banner_img, accept: "image/jpeg,image/png,image/gif", :id => "file"%>
+  </div><br /> 
+  <div class="field">
+    <%= f.label "Ссылка" %><br />
+    <%= f.text_field :link_to %>
+  </div><br />
+  <div class="field">
+    <%= f.label "Описание для админа" %><br />
+    <%= f.text_area :description %>
+  </div><br />
+  <div class="checkbox">
+    <%= f.label "Активен" %>
+    <%= f.check_box :active, class: "col-md-4 control-label" %>
+  </div><br/>
+  <div class="field">
+    <%= f.label "Работает с:" %>
+    <%= if @admin_banner.active? then "#{@admin_banner.started_at}" else " Не активен" end %>
+  </div><br/>
+  <div class="actions">
+    <%= f.submit "Сохранить"%>
+  </div>
+<% end %>
+
