@@ -28,7 +28,7 @@
   	  <td><%= vacancy.city %></td>
       <td><%= vacancy.human_state_name %></td>
       <td><%= vacancy.pending? ? raw("<img src='/assets/line-w.png'>") : vacancy.publicated_at.next_month.strftime("%d.%m.%Y") %></td>
-      <td><%=  %></td>
+      <td><%= vacancy.impressionist_count %></td>
       <% case vacancy.state %>
       <% when "deferred", "published", "hot" %>
           <td><%= link_to "Обновить", {:controller => "employer/vacancies", :action => :update_publicated, :id => vacancy.id}, :title => "Обновить дату публикации", :class => "yellow-link" %>

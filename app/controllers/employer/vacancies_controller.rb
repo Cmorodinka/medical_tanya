@@ -9,6 +9,7 @@ class Employer::VacanciesController < ApplicationController
   before_filter :find_vacancy, :only => [:show, :edit, :update, :destroy, :check_vacancy_valid_and_update_in_draft, :defer, :find_category_list, :update_publicated]
   before_filter :find_contacts, :only => [:new, :edit, :create, :update]
   before_filter :find_category_list, :only => [:new, :edit, :create, :update]
+  impressionist actions: [:show], unique: [:session_hash]
   
   def index
     @vacancies = @company.vacancies
@@ -159,4 +160,10 @@ class Employer::VacanciesController < ApplicationController
   def find_category_list
     @category = Category.where(:scope_id => [@vacancy.company.scope.id, 12])
   end
+
+#   def log_impression
+#   @vacancy = Vacancy.find(params[:id])
+#   # this assumes you have a current_user method in your authentication system
+#   @vacancy.impressions.create(ip_address: request.remote_ip, user_id: current_user.id)
+# end
 end

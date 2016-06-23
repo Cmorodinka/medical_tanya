@@ -62,7 +62,7 @@ class Company < ActiveRecord::Base
     private
 
     def check_link_company
-      str = self.site
+      str = self.site.to_s
       self.site = str.sub(%r(https?://), '').sub(%r((\/*)$), '')
     end
 end

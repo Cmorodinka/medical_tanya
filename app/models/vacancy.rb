@@ -1,5 +1,7 @@
 class Vacancy < ActiveRecord::Base
-  attr_accessible :city, :description, :experiences, :name, :salary, :timetable, :timetable_other, :company_contact_id, :category_id, :hot_vacancy_attributes, :publicated_at
+  is_impressionable :counter_cache => true, :column_name => :impressions_count, :unique => true, :default => 0
+
+  attr_accessible :city, :description, :experiences, :name, :salary, :timetable, :timetable_other, :company_contact_id, :category_id, :hot_vacancy_attributes, :publicated_at, :impressions_count
 
   belongs_to :company
   belongs_to :company_contact

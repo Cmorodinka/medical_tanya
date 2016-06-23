@@ -1,5 +1,6 @@
 # encoding: utf-8
 class Admin::Companies::VacancyController < ApplicationController
+
   layout "admin"
 
   http_basic_authenticate_with :name => "medicalboss", :password => "BOSSmedical54321"
@@ -14,6 +15,7 @@ class Admin::Companies::VacancyController < ApplicationController
   before_filter :find_category_list, :only => [:edit, :update]
   after_filter :update_publicated, :only => [:published, :hot, :update]
   
+ 
   def edit
   end
   
@@ -82,4 +84,5 @@ class Admin::Companies::VacancyController < ApplicationController
   def update_publicated
     @vacancy.update_attribute(:publicated_at, Time.now)
   end
+
 end

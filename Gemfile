@@ -50,3 +50,7 @@ gem 'ruby-progressbar'
 gem "breadcrumbs_on_rails"
 
 gem 'dalli'
+
+gem 'impressionist'
+
+gem 'faker'
